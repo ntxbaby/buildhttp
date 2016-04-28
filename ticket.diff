@@ -1,0 +1,42 @@
+Index: tkt.cpp
+===================================================================
+--- tkt.cpp	(revision 30249)
++++ tkt.cpp	(working copy)
+@@ -269,7 +269,7 @@
+             "    <clientmac>%s</clientmac>\n"
+             "    <serverip>%s</serverip>\n"
+             "    <serverport>%s</serverport>\n"
+-            "    <capturetime>%s</capturetime>\n"
++            "    <capturetime>%d</capturetime>\n"
+             "    <account>%s</account>\n"
+             "    <psgname><![CDATA[%s]]></psgname>\n"
+             "    <psgphone>%s</psgphone>\n"
+@@ -286,6 +286,10 @@
+             "</table>\n");
+ 
+     std::vector<Passenger>::iterator itp = passengers.begin();
++    
++    time_t t = time(NULL);
++    
++              
+ 
+     while (itp != passengers.end()) {
+ 
+@@ -298,7 +302,7 @@
+                 % clientMac
+                 % serverIp
+                 % serverPort
+-                % "2015-12-10 00:00:00"
++                % t
+                 % Account
+                 % itp->Name
+                 % itp->Phone
+@@ -321,7 +325,7 @@
+ }
+  void test(TktInfo& ti)
+ {
+-    int i;
++    size_t i;
+     for(i=0; i<ti.flights.size(); i++)
+     {
+         std::cout << i << "[Flight]    DepartureCity:    " << ti.flights[i].DepartureCity << std::endl;
